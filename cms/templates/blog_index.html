@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — The Fitness Initiative</title>
+    <meta name="description" content="Health and wellness articles from The Fitness Initiative, a Rochester NY nonprofit. Exercise, nutrition, chronic disease management, and community health.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "TFI Blog",
+        "description": "Health and wellness articles from The Fitness Initiative",
+        "url": "https://www.thefitnessinitiative.org/blog.html",
+        "publisher": {
+            "@type": "NGO",
+            "name": "The Fitness Initiative",
+            "url": "https://www.thefitnessinitiative.org"
+        }
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #333; background: #fafafa; }
+        .nav { background: #1a5c2e; color: white; padding: 15px 0; }
+        .nav .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 14px; }
+        .nav .logo { font-weight: bold; font-size: 18px; }
+        .hero { background: linear-gradient(135deg, #1a5c2e, #2a8c4e); color: white; padding: 40px 0; text-align: center; }
+        .hero h1 { font-size: 32px; margin-bottom: 10px; }
+        .hero p { opacity: 0.85; max-width: 600px; margin: 0 auto; }
+        .content { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .blog-entry { background: white; padding: 24px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .blog-entry h2 { font-size: 22px; margin-bottom: 8px; }
+        .blog-entry h2 a { color: #1a5c2e; text-decoration: none; }
+        .blog-entry h2 a:hover { text-decoration: underline; }
+        .blog-entry .meta { font-size: 13px; color: #888; margin-bottom: 10px; }
+        .blog-entry .excerpt { color: #555; margin-bottom: 12px; }
+        .blog-entry .read-more { color: #1a73e8; font-weight: 600; text-decoration: none; }
+        .footer { background: #1a1a1a; color: #999; text-align: center; padding: 20px; font-size: 13px; }
+        .footer a { color: #90ee90; text-decoration: none; }
+        @media (max-width: 600px) { .hero h1 { font-size: 24px; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <span class="logo">The Fitness Initiative</span>
+            <div>
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/programs.html">Programs</a>
+                <a href="/blog.html">Blog</a>
+                <a href="/contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>Blog</h1>
+        <p>Health insights, research updates, and community stories from The Fitness Initiative.</p>
+    </div>
+    <div class="content">
+        {{posts}}
+    </div>
+    <footer class="footer">
+        <p>&copy; 2025 The Fitness Initiative. A Rochester, NY nonprofit. | <a href="https://www.thefitnessinitiative.org">{{org_name}}</a></p>
+    </footer>
+</body>
+</html>

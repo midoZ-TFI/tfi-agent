@@ -1,0 +1,199 @@
+# TFI Agent Configuration
+# ========================
+# Edit this file to customize agent behavior.
+
+# ── Organization ──────────────────────────────────────────────
+org:
+  name: "The Fitness Initiative"
+  short_name: "TFI"
+  url: "https://www.thefitnessinitiative.org"
+  github_repo: "midoZ-TFI/midoZ-TFI.github.io"
+  branch: "main"
+
+# ── People ───────────────────────────────────────────────────
+people:
+  founder:
+    name: "Mido Zelenjakovic"
+    linkedin_url: "https://www.linkedin.com/in/mido-zelenjakovic"
+    role: "Founder & President"
+  co_founder:
+    name: "Cathy Hahn, MD"
+    linkedin_url: null
+    role: "Co-Founder"
+
+# ── Website CMS ───────────────────────────────────────────────
+cms:
+  enabled: true
+  content_dir: "cms/posts"
+  templates_dir: "cms/templates"
+  build_dir: "cms/build"
+  blog_index: "blog.html"
+  assets_dir: "assets"
+  url_pattern: "/blog/{slug}.html"
+
+# ── SEO ────────────────────────────────────────────────────────
+seo:
+  lighthouse:
+    enabled: true
+    thresholds:
+      performance: 70
+      accessibility: 90
+      best_practices: 80
+      seo: 85
+  google_search_console:
+    enabled: false
+  keyword_tracking:
+    primary:
+      - "Rochester nonprofit fitness"
+      - "community nutrition program Rochester NY"
+      - "chronic disease prevention Monroe County"
+      - "health equity Rochester"
+      - "Parkinson's exercise Rochester NY"
+      - "Cooking with Exercise Rochester"
+      - "ReNewMe program Rochester"
+      - "fitness nonprofit Monroe County"
+    secondary:
+      - "adaptive fitness Rochester"
+      - "youth fitness program Rochester"
+      - "family nutrition education NY"
+      - "community wellness nonprofit Rochester"
+    competitors:
+      - "rochesterymca.org"
+      - "rochesterschooloffitness.com"
+  sitemap:
+    auto_generate: true
+    output_file: "sitemap.xml"
+    changefreq: "weekly"
+    priority:
+      home: 1.0
+      programs: 0.9
+      blog: 0.8
+      about: 0.7
+      other: 0.5
+
+# ── Content Agent ────────────────────────────────────────────
+content:
+  blog:
+    posts_per_month: 2
+    pillars:
+      - name: "Movement"
+        description: "Practical exercise guidance for all abilities"
+        keywords: ["exercise", "fitness", "movement", "physical activity", "workout"]
+      - name: "Nutrition"
+        description: "Affordable, practical eating strategies"
+        keywords: ["nutrition", "healthy eating", "diet", "food", "cooking", "budget meals"]
+      - name: "Chronic Conditions"
+        description: "How exercise and nutrition help manage disease"
+        keywords: ["chronic disease", "Parkinson's", "diabetes", "heart disease", "obesity", "cancer recovery"]
+      - name: "Community & Equity"
+        description: "Health equity, access, and nonprofit impact"
+        keywords: ["health equity", "community health", "nonprofit", "access", "underserved"]
+      - name: "Programs & Partnerships"
+        description: "Updates on TFI programs and partner collaborations"
+        keywords: ["programs", "partnerships", "Cooking with Exercise", "ReNewMe", "Fitness 101"]
+    tone: "warm, encouraging, science-grounded, accessible"
+    reading_level: "8th grade"
+    min_words: 800
+    max_words: 1500
+  auto_deploy: true
+
+# ── Research Agent ────────────────────────────────────────────
+research:
+  topics:
+    - name: "Parkinson's Disease"
+      focus: "exercise interventions, neuroplasticity, nutrition"
+      sources: ["pubmed", "who", "cdc"]
+    - name: "Type 2 Diabetes"
+      focus: "lifestyle intervention, exercise, nutrition, prevention"
+      sources: ["pubmed", "who", "cdc"]
+    - name: "Cardiovascular Disease"
+      focus: "exercise-based rehabilitation, nutrition, prevention"
+      sources: ["pubmed", "who", "cdc"]
+    - name: "Obesity"
+      focus: "childhood obesity, family-based interventions, nutrition"
+      sources: ["pubmed", "who", "cdc"]
+    - name: "Cancer Recovery"
+      focus: "exercise oncology, post-treatment fitness, nutrition"
+      sources: ["pubmed", "who", "cdc"]
+    - name: "Health Equity"
+      focus: "access to fitness/nutrition, social determinants of health, nonprofit models"
+      sources: ["pubmed", "cdc", "nih"]
+  update_frequency: "monthly"
+  max_articles_per_topic: 5
+
+# ── Social Agent (LinkedIn) ──────────────────────────────────
+social:
+  linkedin:
+    enabled: true
+    publish_under: "Mido Zelenjakovic"
+    posts_per_month: 4
+    content_mix:
+      blog_promo: 0.25
+      program_updates: 0.25
+      research_sharing: 0.25
+      community_impact: 0.15
+      nonprofit_insights: 0.10
+    hashtags:
+      always:
+        - "HealthEquity"
+        - "NonprofitRochester"
+        - "FitnessForAll"
+      rotate:
+        - "ParkinsonsExercise"
+        - "ChronicDiseasePrevention"
+        - "CommunityHealth"
+        - "RochesterNY"
+        - "HealthyAging"
+        - "NutritionEducation"
+        - "AdaptiveFitness"
+        - "ExerciseIsMedicine"
+        - "MonroeCountyNY"
+        - "NonprofitImpact"
+    auto_publish: true
+
+# ── Web Agent ─────────────────────────────────────────────────
+web:
+  performance:
+    enabled: true
+    max_page_load_ms: 3000
+    max_image_size_kb: 200
+  broken_links:
+    enabled: true
+    check_frequency: "weekly"
+  accessibility:
+    enabled: true
+    wcag_level: "AA"
+  ssl:
+    enabled: true
+    check_expiry_days: 30
+
+# ── Reporting ────────────────────────────────────────────────
+reporting:
+  format: "html"
+  output_dir: "reports/monthly"
+  history_dir: "reports/history"
+  retain_months: 24
+  sections:
+    - "Executive Summary"
+    - "SEO Performance"
+    - "Content Published"
+    - "Research Updates"
+    - "Site Health"
+    - "Social Media Activity"
+    - "Recommendations"
+  email:
+    enabled: false
+    smtp_host: null
+    smtp_port: 587
+    recipients: []
+
+# ── GitHub Actions ───────────────────────────────────────────
+ci:
+  schedule: "0 6 1 * *"
+  weekly_schedule: "0 6 * * 1"
+  auto_deploy_branch: "main"
+
+# ── Paths ─────────────────────────────────────────────────────
+paths:
+  tfi_repo_local: null
+  output_base: "content"
