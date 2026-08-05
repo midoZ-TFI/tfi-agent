@@ -1,0 +1,102 @@
+2026-08-04 19:34:07 [INFO] Starting TFI Agent run: content
+2026-08-04 19:34:07 [INFO] Running content agent...
+2026-08-04 19:34:07 [INFO] Content Agent starting...
+2026-08-04 19:34:07 [INFO] Generating content calendar...
+2026-08-04 19:34:07 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-04 19:34:07 [ERROR] Content Agent error: name 're' is not defined
+2026-08-04 19:34:07 [INFO] content agent completed: error
+2026-08-04 19:34:07 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-04 19:34:07 [WARNING] Build directory is empty — nothing to deploy
+2026-08-04 19:34:07 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-04 19:35:12 [INFO] Starting TFI Agent run: content
+2026-08-04 19:35:12 [INFO] Running content agent...
+2026-08-04 19:35:12 [INFO] Content Agent starting...
+2026-08-04 19:35:12 [INFO] Generating content calendar...
+2026-08-04 19:35:12 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-04 19:35:12 [ERROR] Content Agent error: name 're' is not defined
+2026-08-04 19:35:12 [INFO] content agent completed: error
+2026-08-04 19:35:12 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-04 19:35:12 [WARNING] Build directory is empty — nothing to deploy
+2026-08-04 19:35:12 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-04 19:36:31 [INFO] Starting TFI Agent run: content
+2026-08-04 19:36:31 [INFO] Running content agent...
+2026-08-04 19:36:31 [INFO] Content Agent starting...
+2026-08-04 19:36:31 [INFO] Generating content calendar...
+2026-08-04 19:36:31 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-04 19:36:31 [ERROR] Content Agent error: name 're' is not defined
+2026-08-04 19:36:31 [INFO] content agent completed: error
+2026-08-04 19:36:31 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-04 19:36:31 [WARNING] Build directory is empty — nothing to deploy
+2026-08-04 19:36:31 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-04 19:38:45 [INFO] Starting TFI Agent run: content
+2026-08-04 19:38:45 [INFO] Running content agent...
+2026-08-04 19:38:45 [INFO] Content Agent starting...
+2026-08-04 19:38:45 [INFO] Generating content calendar...
+2026-08-04 19:38:45 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-04 19:38:45 [INFO] Creating blog post: Understanding Food Labels: A Family Guide (pillar: Nutrition)
+2026-08-04 19:38:45 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/understanding-food-labels-a-family-guide.md
+2026-08-04 19:38:45 [INFO] Blog post created: understanding-food-labels-a-family-guide
+2026-08-04 19:38:45 [INFO] Creating blog post: Quick Healthy Meals in Under 20 Minutes (pillar: Nutrition)
+2026-08-04 19:38:45 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/quick-healthy-meals-in-under-20-minutes.md
+2026-08-04 19:38:45 [INFO] Blog post created: quick-healthy-meals-in-under-20-minutes
+2026-08-04 19:38:45 [INFO] Content results saved to content/blog_drafts/content_202608.json
+2026-08-04 19:38:45 [INFO] Content Agent completed successfully.
+2026-08-04 19:38:45 [INFO] content agent completed: completed
+2026-08-04 19:38:45 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-04 19:38:45 [WARNING] Build directory is empty — nothing to deploy
+2026-08-04 19:38:45 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-04 19:41:45 [INFO] Starting TFI Agent run: content
+2026-08-04 19:41:45 [INFO] Running content agent...
+2026-08-04 19:41:45 [INFO] Content Agent starting...
+2026-08-04 19:41:45 [INFO] Generating content calendar...
+2026-08-04 19:41:45 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-04 19:41:45 [INFO] Creating blog post: Walking for Heart Health: A Rochester Guide (pillar: Movement)
+2026-08-04 19:41:45 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/walking-for-heart-health-a-rochester-guide.md
+2026-08-04 19:41:45 [INFO] Blog post created: walking-for-heart-health-a-rochester-guide
+2026-08-04 19:41:45 [INFO] Creating blog post: Gentle Morning Stretches for Better Mobility (pillar: Movement)
+2026-08-04 19:41:45 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/gentle-morning-stretches-for-better-mobility.md
+2026-08-04 19:41:45 [INFO] Blog post created: gentle-morning-stretches-for-better-mobility
+2026-08-04 19:41:45 [INFO] Content results saved to content/blog_drafts/content_202608.json
+2026-08-04 19:41:45 [INFO] Content Agent completed successfully.
+2026-08-04 19:41:45 [INFO] content agent completed: completed
+2026-08-04 19:41:45 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-04 19:41:45 [WARNING] Build directory is empty — nothing to deploy
+2026-08-04 19:41:45 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-04 19:45:31 [INFO] Starting TFI Agent run: social
+2026-08-04 19:45:31 [ERROR] social agent failed: unterminated string literal (detected at line 76) (social_agent.py, line 76)
+2026-08-04 19:48:51 [INFO] Starting TFI Agent run: social
+2026-08-04 19:48:51 [INFO] Running social agent...
+2026-08-04 19:48:51 [INFO] Social Agent starting...
+2026-08-04 19:48:51 [ERROR] Social Agent error: 'float' object cannot be interpreted as an integer
+2026-08-04 19:48:51 [INFO] social agent completed: error
+2026-08-04 19:50:12 [INFO] Starting TFI Agent run: social
+2026-08-04 19:50:12 [INFO] Running social agent...
+2026-08-04 19:50:12 [INFO] Social Agent starting...
+2026-08-04 19:50:12 [INFO] Creating LinkedIn post 1: nonprofit_insights
+2026-08-04 19:50:12 [INFO]   No LINKEDIN_ACCESS_TOKEN found, saving as draft only
+2026-08-04 19:50:12 [INFO]   LinkedIn post created: nonprofit_insights (756 chars)
+2026-08-04 19:50:12 [INFO] Creating LinkedIn post 2: nonprofit_insights
+2026-08-04 19:50:12 [INFO]   No LINKEDIN_ACCESS_TOKEN found, saving as draft only
+2026-08-04 19:50:12 [INFO]   LinkedIn post created: nonprofit_insights (758 chars)
+2026-08-04 19:50:12 [INFO] Creating LinkedIn post 3: nonprofit_insights
+2026-08-04 19:50:12 [INFO]   No LINKEDIN_ACCESS_TOKEN found, saving as draft only
+2026-08-04 19:50:12 [INFO]   LinkedIn post created: nonprofit_insights (780 chars)
+2026-08-04 19:50:12 [INFO] Creating LinkedIn post 4: nonprofit_insights
+2026-08-04 19:50:12 [INFO]   No LINKEDIN_ACCESS_TOKEN found, saving as draft only
+2026-08-04 19:50:12 [INFO]   LinkedIn post created: nonprofit_insights (759 chars)
+2026-08-04 19:50:12 [INFO] Social results saved to content/linkedin_posts/social_202608.json
+2026-08-04 19:50:12 [INFO] Social Agent completed successfully.
+2026-08-04 19:50:12 [INFO] social agent completed: completed
+2026-08-04 20:01:32 [INFO] Starting TFI Agent run: social
+2026-08-04 20:01:32 [INFO] Running social agent...
+2026-08-04 20:01:32 [INFO] Social Agent starting...
+2026-08-04 20:01:32 [INFO] Creating LinkedIn post 1: nonprofit_insights
+2026-08-04 20:01:32 [INFO] LinkedIn post created: nonprofit_insights (792 chars)
+2026-08-04 20:01:32 [INFO] Creating LinkedIn post 2: nonprofit_insights
+2026-08-04 20:01:32 [INFO] LinkedIn post created: nonprofit_insights (791 chars)
+2026-08-04 20:01:32 [INFO] Creating LinkedIn post 3: nonprofit_insights
+2026-08-04 20:01:32 [INFO] LinkedIn post created: nonprofit_insights (804 chars)
+2026-08-04 20:01:32 [INFO] Creating LinkedIn post 4: nonprofit_insights
+2026-08-04 20:01:32 [INFO] LinkedIn post created: nonprofit_insights (807 chars)
+2026-08-04 20:01:32 [INFO] Social Agent completed successfully.
+2026-08-04 20:01:32 [INFO] social agent completed: completed

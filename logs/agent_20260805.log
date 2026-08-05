@@ -1,0 +1,34 @@
+2026-08-05 14:12:15 [INFO] Starting TFI Agent run: content
+2026-08-05 14:12:15 [INFO] Running content agent...
+2026-08-05 14:12:15 [INFO] Content Agent starting...
+2026-08-05 14:12:15 [INFO] Generating content calendar...
+2026-08-05 14:12:15 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-05 14:12:15 [INFO] Creating blog post: Post-Treatment Cancer Recovery: The Role of Community-Based Fitness and Nutrition Support (pillar: Chronic Conditions)
+2026-08-05 14:12:15 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/post-treatment-cancer-recovery-the-role-of-community-based-fitness-and-nutrition-support.md
+2026-08-05 14:12:15 [INFO] Blog post created: post-treatment-cancer-recovery-the-role-of-community-based-fitness-and-nutrition-support
+2026-08-05 14:12:15 [INFO] Creating blog post: Nutrition Education as a Chronic Disease Intervention: Evidence and Impact (pillar: Nutrition)
+2026-08-05 14:12:15 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/nutrition-education-as-a-chronic-disease-intervention-evidence-and-impact.md
+2026-08-05 14:12:15 [INFO] Blog post created: nutrition-education-as-a-chronic-disease-intervention-evidence-and-impact
+2026-08-05 14:12:15 [INFO] Content results saved to content/blog_drafts/content_202608.json
+2026-08-05 14:12:15 [INFO] Content Agent completed successfully.
+2026-08-05 14:12:15 [INFO] content agent completed: completed
+2026-08-05 14:12:15 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-05 14:12:15 [WARNING] Build directory is empty — nothing to deploy
+2026-08-05 14:12:15 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-05 14:14:27 [INFO] Starting TFI Agent run: content
+2026-08-05 14:14:27 [INFO] Running content agent...
+2026-08-05 14:14:27 [INFO] Content Agent starting...
+2026-08-05 14:14:27 [INFO] Generating content calendar...
+2026-08-05 14:14:27 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-05 14:14:27 [INFO] Creating blog post: Type 2 Diabetes Management Through Lifestyle Intervention: A Model for Nonprofit Collaboration (pillar: Chronic Conditions)
+2026-08-05 14:14:27 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/type-2-diabetes-management-through-lifestyle-intervention-a-model-for-nonprofit-collaboration.md
+2026-08-05 14:14:27 [INFO] Blog post created: type-2-diabetes-management-through-lifestyle-intervention-a-model-for-nonprofit-collaboration
+2026-08-05 14:14:27 [INFO] Creating blog post: Why Movement Matters: Building Accessible Fitness for Underserved Populations (pillar: Movement)
+2026-08-05 14:14:27 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/why-movement-matters-building-accessible-fitness-for-underserved-populations.md
+2026-08-05 14:14:27 [INFO] Blog post created: why-movement-matters-building-accessible-fitness-for-underserved-populations
+2026-08-05 14:14:27 [INFO] Content results saved to content/blog_drafts/content_202608.json
+2026-08-05 14:14:27 [INFO] Content Agent completed successfully.
+2026-08-05 14:14:27 [INFO] content agent completed: completed
+2026-08-05 14:14:27 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-05 14:14:27 [WARNING] Build directory is empty — nothing to deploy
+2026-08-05 14:14:27 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}

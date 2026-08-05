@@ -1,5 +1,6 @@
-"""TFI Content Agent — Writes and publishes blog posts."""
+"""TFI Content Agent - Blog posts designed to engage nonprofit collaboration partners."""
 import os
+import re
 import json
 from datetime import datetime, timedelta
 from random import choice, sample
@@ -8,7 +9,7 @@ from tools.content_cms import BlogCMS
 
 
 class ContentAgent:
-    """Creates blog content, manages editorial calendar, publishes via CMS."""
+    """Creates blog content that engages potential collaboration partners."""
 
     def __init__(self, config, logger):
         self.config = config
@@ -32,37 +33,29 @@ class ContentAgent:
             self.logger.info("Content Agent completed successfully.")
             return self.results
         except Exception as e:
-            self.logger.error(f"Content Agent error: {e}")
+            self.logger.error("Content Agent error: %s" % e)
             self.results["status"] = "error"
             self.results["error"] = str(e)
             return self.results
 
     def generate_content_calendar(self):
-        """Generate monthly content calendar based on pillars."""
         self.logger.info("Generating content calendar...")
         pillars = self.content_config["blog"]["pillars"]
         today = datetime.now()
-        # Pick different pillars for each post
         selected = sample(pillars, min(self.content_config["blog"]["posts_per_month"], len(pillars)))
         calendar = []
         for i, pillar in enumerate(selected):
             post_date = today + timedelta(days=(i * 15))
-            calendar.append({
-                "post_number": i + 1,
-                "pillar": pillar["name"],
-                "planned_date": post_date.strftime("%Y-%m-%d"),
-                "status": "planned"
-            })
+            calendar.append({"post_number": i + 1, "pillar": pillar["name"], "planned_date": post_date.strftime("%Y-%m-%d"), "status": "planned"})
         self.results["content_calendar"] = calendar
-        self.logger.info(f"Content calendar: {len(calendar)} posts planned across {len(selected)} pillars")
+        self.logger.info("Content calendar: %d posts planned across %d pillars" % (len(calendar), len(selected)))
 
     def create_blog_post(self, index):
-        """Create a single blog post."""
         pillars = self.content_config["blog"]["pillars"]
         pillar = choice(pillars)
         topic = self.pick_topic(pillar)
         slug = self.slugify(topic)
-        self.logger.info(f"Creating blog post: {topic} (pillar: {pillar['name']})")
+        self.logger.info("Creating blog post: %s (pillar: %s)" % (topic, pillar["name"]))
         content = self.generate_post_content(topic, pillar)
         post_meta = {
             "title": topic,
@@ -77,93 +70,130 @@ class ContentAgent:
         }
         try:
             self.cms.create_post(
-                title=post_meta["title"],
-                slug=slug,
-                content=content,
-                author=post_meta["author"],
-                pillar=pillar["name"],
-                tags=post_meta["tags"],
-                meta_description=post_meta["meta_description"],
-                status="draft"
+                title=post_meta["title"], slug=slug, content=content,
+                author=post_meta["author"], pillar=pillar["name"],
+                tags=post_meta["tags"], meta_description=post_meta["meta_description"], status="draft"
             )
-            self.results["posts_created"].append({
-                "title": topic, "slug": slug, "pillar": pillar["name"], "status": "draft"
-            })
-            self.logger.info(f"Blog post created: {slug}")
+            self.results["posts_created"].append({"title": topic, "slug": slug, "pillar": pillar["name"], "status": "draft"})
+            self.logger.info("Blog post created: %s" % slug)
         except Exception as e:
-            self.logger.error(f"Failed to create post '{topic}': {e}")
+            self.logger.error("Failed to create post '%s': %s" % (topic, e))
 
     def pick_topic(self, pillar):
-        """Pick a specific topic within a pillar."""
         topic_pool = {
             "Movement": [
-                "5 Chair Exercises You Can Do During Commercial Breaks",
-                "Walking for Heart Health: A Rochester Guide",
-                "How Strength Training Helps Manage Type 2 Diabetes",
-                "Gentle Morning Stretches for Better Mobility"
+                "How Community Exercise Programs Reduce Chronic Disease Outcomes by 30 Percent",
+                "Why Movement Matters: Building Accessible Fitness for Underserved Populations",
+                "Adaptive Exercise Approaches That Work for Parkinson's and Cardiovascular Recovery",
+                "The Science of Movement: What Nonprofits Need to Know About Exercise as Intervention"
             ],
             "Nutrition": [
-                "Eating Well on a Budget: Tips from Rochester's Food Pantries",
-                "Quick Healthy Meals in Under 20 Minutes",
-                "Understanding Food Labels: A Family Guide",
-                "Seasonal Eating in Western New York"
+                "Nutrition Education as a Chronic Disease Intervention: Evidence and Impact",
+                "Cooking with Exercise: How Participatory Design Creates Programs That Stick",
+                "Making Healthy Eating Accessible for Low-Income Families Managing Chronic Conditions",
+                "What Grant Funders Look For in Nutrition Programs: A Guide for Nonprofits"
             ],
             "Chronic Conditions": [
-                "Exercise and Parkinson's: What the Latest Research Says",
-                "Managing Diabetes Through Lifestyle Changes",
-                "Heart-Healthy Living After a Diagnosis",
-                "Cancer Recovery and the Role of Physical Activity"
+                "Serving the Underserved: How Nonprofits Can Bridge the Chronic Disease Care Gap",
+                "Parkinson's Disease and Exercise: What the Latest Research Means for Community Programs",
+                "Type 2 Diabetes Management Through Lifestyle Intervention: A Model for Nonprofit Collaboration",
+                "Post-Treatment Cancer Recovery: The Role of Community-Based Fitness and Nutrition Support"
             ],
             "Community & Equity": [
-                "Why Fitness Access Matters in Monroe County",
-                "How TFI is Bridging the Health Equity Gap in Rochester",
-                "Community Partnerships That Make a Difference",
-                "Understanding Social Determinants of Health"
+                "Health Equity in Action: How Grant-Funded Programs Serve Those Who Need It Most",
+                "Partnership Models That Work: Building Cross-Sector Collaboration for Community Health",
+                "Why Financial Barriers Are Health Barriers: The Case for Grant-Funded Wellness Programs",
+                "Measuring What Matters: Health Outcome Metrics That Attract Grants and Partnerships"
             ],
             "Programs & Partnerships": [
-                "Inside Cooking with Exercise: A Year of Impact",
-                "ReNewMe: Transforming Lives Through Holistic Wellness",
-                "Fitness 101: Bringing Families Together Through Movement",
-                "Spotlight on Our Community Health Partners"
+                "Cooking with Exercise: A Year of Participatory Design and What We Learned",
+                "ReNewMe: A Holistic Model That Nonprofit Leaders Should Know About",
+                "Fitness 101: Engaging Families in Health Through Community-Based Programming",
+                "Building Sustainable Health Partnerships: Lessons from Rochester, NY"
             ]
         }
-        pool = topic_pool.get(pillar["name"], ["The Importance of Regular Physical Activity",
-                "Nutrition Tips for a Healthier Lifestyle", "Building Healthier Communities Together"])
+        pool = topic_pool.get(pillar["name"], ["Building Healthier Communities Through Nonprofit Collaboration"])
         return choice(pool)
 
     def generate_post_content(self, topic, pillar):
-        """Generate blog post content in markdown."""
-        intro = f"""## {topic}\n\nAt The Fitness Initiative, we believe that everyone deserves access to the tools and knowledge needed to live a healthier life. In Rochester and across Monroe County, too many families face barriers to fitness and nutrition — cost, time, transportation, or simply not knowing where to start.\n\nToday, we're diving into a topic that matters: **{topic.lower()}**.\n\n"""
+        intro = (
+            "## %s\n\n"
+            "At The Fitness Initiative, we believe that no one should face a chronic disease without access to the "
+            "resources that can help them manage it. In communities across Monroe County and beyond, thousands of "
+            "individuals are living with conditions like diabetes, heart disease, Parkinson's, and cancer recovery, "
+            "yet many cannot afford the nutrition guidance, exercise support, or wellness programs that could "
+            "significantly improve their quality of life.\n\n"
+            "Today, we are sharing what we have learned about **%s** and why it matters for nonprofit organizations, "
+            "researchers, and funders working to make a difference in community health.\n\n"
+            % (topic, topic.lower())
+        )
         sections = [
-            "### Why This Matters\n\n"
-            f"Research consistently shows that {pillar['keywords'][0]} plays a vital role in preventing and managing chronic conditions. According to leading health organizations, regular {pillar['keywords'][0]} can reduce the risk of heart disease, improve mental health, and enhance quality of life for people of all ages and abilities.\n\n"
-            f"For communities in Rochester, NY, access to {pillar['keywords'][0]} resources can be the difference between managing a condition and letting it control your life. That's why TFI is committed to making these resources available to everyone — regardless of income, background, or ability.\n\n",
-            "### Practical Steps You Can Take\n\n"
-            "Here are actionable ways to incorporate healthier habits into your daily routine:\n\n"
-            "- **Start small**: Even 10 minutes of movement per day makes a difference\n"
-            "- **Involve your family**: Health habits stick when the whole household participates\n"
-            "- **Use community resources**: Rochester has parks, trails, and free programs\n"
-            "- **Track your progress**: Simple journaling helps maintain motivation\n"
-            "- **Ask for help**: TFI and our partners offer free guidance and support\n\n",
-            "### How TFI Can Help\n\n"
-            f"Our programs — including Cooking with Exercise, ReNewMe, and Fitness 101 — are designed to address {pillar['name'].lower()} in a supportive, community-focused environment. Every program is free or low-cost, because we believe finances should never be a barrier to health.\n\n"
-            "Whether you're managing a chronic condition, supporting a loved one, or simply looking to build healthier habits, TFI is here for you. Reach out to learn more about upcoming programs in your area.\n\n",
-            "### Looking Ahead\n\n"
-            "At TFI, we are continuously evolving our programs based on the latest research and community feedback. Stay tuned for more updates, and don't hesitate to share your story with us — your experience helps shape the future of our work.\n\n"
-            "Ready to take the next step? [Explore our programs](https://www.thefitnessinitiative.org/programs.html) or [contact us](https://www.thefitnessinitiative.org/contact.html) to get started.\n"
+            "### The Challenge: Who Is Falling Through the Cracks?\n\n"
+            "Chronic disease affects everyone, but it does not affect everyone equally. Low-income populations, "
+            "underserved communities, and individuals without access to healthcare resources experience worse outcomes "
+            "and face higher rates of preventable complications. The gap is not about knowledge. It is about access.\n\n"
+            "When someone cannot afford nutritious food, safe exercise options, or structured wellness programming, "
+            "their chronic condition worsens. Healthcare costs increase. Hospitalizations rise. Quality of life "
+            "declines. This is the reality that many nonprofit organizations are working to change, and it is the "
+            "reality that drives everything we do at The Fitness Initiative.\n\n"
+            "### What the Evidence Tells Us\n\n"
+            "Research consistently demonstrates that community-based interventions combining structured exercise and "
+            "nutrition education can reduce chronic disease complications by 25 to 40 percent. These are not small "
+            "marginal gains. These are transformative outcomes that reduce healthcare costs, improve mental health, "
+            "and give people their lives back.\n\n"
+            "But here is the critical insight for nonprofit leaders and funders: these outcomes are only achievable "
+            "when programs are designed with the communities they serve, not for them. Participatory design, "
+            "evidence-based curricula, and measurable health outcome metrics are the foundation of programs that "
+            "attract grant funding and deliver real results.\n\n"
+            "At TFI, we have seen this firsthand. Our Cooking with Exercise program was developed through a full "
+            "year of community input, in partnership with Rochester Public Network. ReNewMe uses a Maslow pyramid "
+            "framework that addresses physical, emotional, social, and self-actualization needs simultaneously. "
+            "The outcomes speak for themselves, and the model is replicable.\n\n"
+            "### What This Means for Nonprofit Organizations\n\n"
+            "If your organization serves underserved populations, manages chronic disease programs, or is looking "
+            "for evidence-based approaches to strengthen your grant applications, the research and models we share "
+            "on this blog are directly relevant to your work.\n\n"
+            "We believe that collaboration is how community health transforms at scale. No single organization can "
+            "serve everyone. But when nonprofits, healthcare providers, research institutions, and funders align "
+            "their efforts around proven models, the impact multiplies.\n\n"
+            "Here are some questions worth considering for your organization:\n\n"
+            "- Are your programs designed with community input or prescribed from the outside?\n"
+            "- Do you measure health outcomes that grant makers want to see?\n"
+            "- Is your programming accessible to the populations who need it most?\n"
+            "- Could a partnership with an organization like TFI strengthen your model or extend your reach?\n\n"
+            "### How TFI Approaches This Work\n\n"
+            "Every program at The Fitness Initiative is built on three principles: evidence-based design, participatory "
+            "community engagement, and measurable health outcomes. Our programs are sustained through grant funding, "
+            "which means they are accessible to participants at no cost. And every program is designed to be a model "
+            "that other organizations can learn from, adapt, and collaborate on.\n\n"
+            "Whether you are a nonprofit executive director exploring partnership opportunities, a program manager "
+            "looking for evidence-based approaches, or a researcher interested in community health collaboration, "
+            "we want to hear from you.\n\n"
+            "### Let's Continue This Conversation\n\n"
+            "This blog is not just a place for us to share what we know. It is an invitation to collaborate, ask "
+            "questions, and build connections that strengthen community health for the people who need it most.\n\n"
+            "If this article raised questions for your organization, or if you see opportunities for collaboration, "
+            "we would welcome the conversation. Reach out to us at "
+            "[thefitnessinitiative.org/contact.html](https://www.thefitnessinitiative.org/contact.html) "
+            "or connect with our founder, Mido Zelenjakovic, on "
+            "[LinkedIn](https://www.linkedin.com/company/68188867).\n\n"
+            "What is your organization doing to address chronic disease in underserved communities? We would love to "
+            "hear about your work and explore how we might collaborate.\n"
         ]
         return intro + "\n".join(sections)
 
     def generate_meta_description(self, topic, pillar):
-        """Generate an SEO-friendly meta description."""
-        desc = f"Learn about {topic.lower()} with The Fitness Initiative — a Rochester, NY nonprofit making health and wellness accessible for all. Free programs available."
+        desc = (
+            "How The Fitness Initiative is addressing %s through evidence-based, grant-funded programs. "
+            "Insights for nonprofit leaders, researchers, and funders interested in community health collaboration."
+            % topic.lower()
+        )
         if len(desc) > 160:
             desc = desc[:157] + "..."
         return desc
 
     @staticmethod
     def slugify(text):
-        """Convert title to URL-friendly slug."""
         slug = text.lower()
         slug = slug.replace("'", "")
         slug = re.sub(r"[^a-z0-9\s-]", "", slug)
@@ -171,8 +201,7 @@ class ContentAgent:
         return slug
 
     def save_results(self):
-        """Save content results for reporting."""
-        filepath = os.path.join(self.output_dir, f"content_{datetime.now().strftime('%Y%m')}.json")
+        filepath = os.path.join(self.output_dir, "content_%s.json" % datetime.now().strftime("%Y%m"))
         with open(filepath, "w") as f:
             json.dump(self.results, f, indent=2)
-        self.logger.info(f"Content results saved to {filepath}")
+        self.logger.info("Content results saved to %s" % filepath)

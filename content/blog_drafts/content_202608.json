@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "posts_created": [
+    {
+      "title": "Type 2 Diabetes Management Through Lifestyle Intervention: A Model for Nonprofit Collaboration",
+      "slug": "type-2-diabetes-management-through-lifestyle-intervention-a-model-for-nonprofit-collaboration",
+      "pillar": "Chronic Conditions",
+      "status": "draft"
+    },
+    {
+      "title": "Why Movement Matters: Building Accessible Fitness for Underserved Populations",
+      "slug": "why-movement-matters-building-accessible-fitness-for-underserved-populations",
+      "pillar": "Movement",
+      "status": "draft"
+    }
+  ],
+  "posts_published": [],
+  "content_calendar": [
+    {
+      "post_number": 1,
+      "pillar": "Programs & Partnerships",
+      "planned_date": "2026-08-05",
+      "status": "planned"
+    },
+    {
+      "post_number": 2,
+      "pillar": "Chronic Conditions",
+      "planned_date": "2026-08-20",
+      "status": "planned"
+    }
+  ],
+  "timestamp": "2026-08-05T14:14:27.569417"
+}
