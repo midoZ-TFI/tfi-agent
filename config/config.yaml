@@ -126,7 +126,7 @@ social:
   linkedin:
     enabled: true
     publish_under: "Mido Zelenjakovic"
-    posts_per_month: 4
+    posts_per_month: 1
     content_mix:
       blog_promo: 0.25
       program_updates: 0.25

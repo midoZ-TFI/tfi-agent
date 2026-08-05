@@ -1,7 +1,7 @@
 name: TFI Agent Monthly Run
 on:
   schedule:
-    - cron: '0 6 1 * *'
+    - cron: '0 15 1 * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -19,13 +19,14 @@ jobs:
           pip install -r requirements-extra.txt
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli
-      - name: Run all agents
-        run: python tfi_agent.py run --all
-        env:
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-          TFI_REPO_TOKEN: ${{ secrets.TFI_REPO_TOKEN }}
+      - name: Run SEO, content, research, web agents
+        run: python tfi_agent.py run --seo --content --research --web
       - name: Generate report
         run: python tfi_agent.py report
+      - name: Deploy content to TFI site
+        run: python tfi_agent.py deploy
+        env:
+          TFI_REPO_TOKEN: ${{ secrets.TFI_REPO_TOKEN }}
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
