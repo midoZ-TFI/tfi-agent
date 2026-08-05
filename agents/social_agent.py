@@ -1,4 +1,4 @@
-"""TFI Social Agent — Generates and publishes LinkedIn content."""
+"""TFI Social Agent - LinkedIn content for nonprofit business leaders."""
 import os
 import json
 from datetime import datetime
@@ -23,7 +23,7 @@ class SocialAgent:
         self.logger.info("Social Agent starting...")
         try:
             if not self.social_config["enabled"]:
-                self.logger.info("LinkedIn integration disabled in config.")
+                self.logger.info("LinkedIn integration disabled.")
                 self.results["status"] = "skipped"
                 return self.results
             posts_this_month = self.social_config["posts_per_month"]
@@ -35,101 +35,158 @@ class SocialAgent:
             self.logger.info("Social Agent completed successfully.")
             return self.results
         except Exception as e:
-            self.logger.error(f"Social Agent error: {e}")
+            self.logger.error("Social Agent error: %s" % e)
             self.results["status"] = "error"
             self.results["error"] = str(e)
             return self.results
 
     def create_linkedin_post(self, index):
-        """Create a LinkedIn post based on content mix."""
         content_mix = self.social_config["content_mix"]
-        # Weighted random selection of post type
         post_types = list(content_mix.keys())
         weights = [content_mix[t] for t in post_types]
         post_type = self._weighted_choice(post_types, weights)
-        self.logger.info(f"Creating LinkedIn post {index + 1}: {post_type}")
+        self.logger.info("Creating LinkedIn post %d: %s" % (index + 1, post_type))
         content = self.generate_post_content(post_type)
         hashtags = self.select_hashtags()
-        full_post = f"{content}\n\n{hashtags}"
-        filename = f"linkedin_{post_type}_{datetime.now().strftime('%Y%m%d')}_{index}.txt"
+        full_post = content + "\n\n" + hashtags
+        filename = "linkedin_%s_%s_%d.txt" % (post_type, datetime.now().strftime("%Y%m%d"), index)
         filepath = os.path.join(self.output_dir, filename)
         with open(filepath, "w") as f:
             f.write(full_post)
-        post_record = {
-            "type": post_type,
-            "filename": filename,
-            "filepath": filepath,
-            "char_count": len(full_post),
-            "status": "draft"
-        }
+        post_record = {"type": post_type, "filename": filename, "char_count": len(full_post), "status": "draft"}
         self.results["posts_created"].append(post_record)
         if self.social_config.get("auto_publish", False):
             self.publish_post(full_post, post_record)
-        else:
-            self.logger.info(f"  Post saved as draft: {filename} (auto_publish is off)")
-        self.logger.info(f"  LinkedIn post created: {post_type} ({len(full_post)} chars)")
+        self.logger.info("LinkedIn post created: %s (%d chars)" % (post_type, len(full_post)))
 
     def generate_post_content(self, post_type):
-        """Generate content for a specific post type."""
+        """Generate LinkedIn content for nonprofit leaders about collaboration to serve underserved chronic disease populations."""
         templates = {
             "blog_promo": [
-                "New on the TFI blog: {title}\n\nAt The Fitness Initiative, we're committed to sharing practical, evidence-based health guidance with our Rochester community. Our latest post dives into {topic} — because everyone deserves access to the knowledge that can change their health trajectory.\n\nRead more: {url}\n\nWhat's one health habit that made a difference in your life?",
-                "Just published: {title}\n\nThis one hits close to home for our team. {topic} affects thousands of families in Monroe County, and we believe understanding it is the first step toward action.\n\nCheck it out: {url}\n\nTag someone who needs to see this."
+                "Chronic disease does not care about your income level. But access to healthy living resources often depends on it.\n\n"
+                "At The Fitness Initiative, we exist to close that gap. Our grant-funded programs serve individuals in Monroe County "
+                "who are living with chronic diseases like diabetes, heart disease, and Parkinson's, and who otherwise could not afford "
+                "the nutrition guidance and exercise support they need.\n\n"
+                "Our latest article shares what we have learned about making health accessible to those who need it most.\n\n"
+                "If your organization serves a similar population, I would welcome a conversation about collaboration.\n\n"
+                "Read more: https://www.thefitnessinitiative.org/blog.html",
+
+                "What happens when someone with a chronic disease cannot afford to eat well or stay active?\n\n"
+                "Their condition worsens. Healthcare costs rise. Quality of life declines. And the cycle continues.\n\n"
+                "At The Fitness Initiative, we break that cycle through grant-funded programs that provide exercise, nutrition, "
+                "and wellness support at no cost to participants. Our latest blog post explores how community-driven approaches "
+                "are making a measurable difference.\n\n"
+                "If your nonprofit is working in this space, let us connect. Collaboration amplifies impact.\n\n"
+                "https://www.thefitnessinitiative.org/blog.html"
             ],
             "program_updates": [
-                "Program Spotlight: Cooking with Exercise\n\nThis year-long participatory design program, developed in partnership with Rochester Public Network, is transforming how families in Rochester think about the connection between what they eat and how they move.\n\nParticipants aren't just learning — they're co-creating the curriculum. That's the TFI difference.\n\nInterested in joining? Visit thefitnessinitiative.org\n\n#HealthEquity #NonprofitRochester",
-                "ReNewMe is back and better than ever.\n\nUsing a holistic Maslow pyramid model, this program addresses health from the ground up — physical wellness, emotional well-being, social connection, and self-actualization.\n\nBecause real health transformation isn't just about exercise. It's about the whole person.\n\nLearn more at thefitnessinitiative.org"
+                "Program Spotlight: Cooking with Exercise\n\n"
+                "Imagine being told you need to change your diet and start exercising to manage your chronic condition, "
+                "but you cannot afford healthy food or a gym membership.\n\n"
+                "That is the reality for many people in our community. Cooking with Exercise was designed specifically for them.\n\n"
+                "Developed in partnership with Rochester Public Network through a full year of community input, this grant-funded "
+                "program teaches participants how to prepare nutritious meals and integrate movement into their daily lives, "
+                "regardless of their financial situation.\n\n"
+                "For nonprofit leaders looking for a proven collaboration model, this is what partnership in action looks like.\n\n"
+                "I would welcome conversations with organizations interested in bringing this approach to their communities.",
+
+                "ReNewMe: Addressing the whole person, not just the diagnosis\n\n"
+                "When someone is living with a chronic disease and struggling financially, treating the condition alone is not enough. "
+                "They need support for their physical health, emotional well-being, social connection, and self-empowerment.\n\n"
+                "ReNewMe, our grant-funded wellness program, uses a Maslow pyramid framework to address all four dimensions. "
+                "Participants are not just patients. They are people rebuilding their lives.\n\n"
+                "For nonprofit organizations serving underserved populations with chronic conditions, this model demonstrates what "
+                "holistic, grant-funded care can achieve.\n\n"
+                "If your organization is interested in collaborating on programs like this, let us talk."
             ],
             "research_sharing": [
-                "New research on {topic} just caught our attention.\n\nThe findings reinforce what we see every day at TFI: {finding}\n\nThis is exactly why community-based health programs matter. When people have access to the right support, outcomes improve — dramatically.\n\nWhat are your thoughts on this research?",
-                "A recent study published in {journal} highlights something critical for nonprofit health organizations:\n\n{finding}\n\nAt TFI, we've been incorporating these principles into our programs for years. The science is catching up to what our community already knows — health is a team effort.\n\nSource: {source}"
+                "Research consistently shows that lifestyle intervention is one of the most effective treatments for chronic disease. "
+                "But for low-income populations, access to these interventions is the real challenge.\n\n"
+                "At The Fitness Initiative, we use grant funding to remove that barrier. Our programs provide structured exercise "
+                "and nutrition support to individuals who cannot afford it, producing measurable improvements in health outcomes.\n\n"
+                "For nonprofit leaders, the evidence is clear: community-based programs that serve underserved chronic disease "
+                "populations deliver strong outcomes and strong grant ROI.\n\n"
+                "The question is not whether this works. It is whether we can scale it together.\n\n"
+                "I welcome conversations with organizations ready to collaborate.",
+
+                "New evidence on community-based chronic disease management:\n\n"
+                "Structured exercise and nutrition programs can reduce hospitalizations and improve quality of life for individuals "
+                "with chronic conditions by up to 30-40 percent. Yet the populations who need these programs most are often the "
+                "least able to access them.\n\n"
+                "At The Fitness Initiative, grant funding allows us to serve these individuals at no cost. Our participant outcomes "
+                "confirm what the research predicts: when you remove financial barriers, people get healthier.\n\n"
+                "For nonprofit leaders seeking evidence-based partnership opportunities, our model in Monroe County is producing "
+                "results that matter.\n\n"
+                "Let us explore what collaboration could look like for your organization."
             ],
             "community_impact": [
-                "Here's what health equity looks like in practice:\n\nAt The Fitness Initiative, we served {number} families in Monroe County last year through programs that are FREE or low-cost.\n\nBut the impact goes beyond numbers. It's the mom who learned to manage her diabetes through movement. The veteran who found community through our adaptive fitness program. The kids who discovered that healthy food can actually taste good.\n\nThis is what nonprofit work looks like. This is TFI.\n\nSupport our mission at thefitnessinitiative.org",
-                "A message from one of our Cooking with Exercise participants:\n\n\"I never thought I could afford to eat healthy. TFI showed me it's not about expensive ingredients — it's about knowledge and community.\"\n\nThis is why we do what we do. Health should never be a privilege.\n\n#CommunityHealth #HealthEquity #RochesterNY"
+                "A reality check for nonprofit leaders:\n\n"
+                "In Monroe County, thousands of individuals are living with chronic diseases like diabetes, heart disease, "
+                "and Parkinson's. Many of them cannot afford the nutrition guidance, exercise programs, or wellness support "
+                "that could improve their conditions.\n\n"
+                "The Fitness Initiative exists to change that. Through grant-funded programs developed with community input, "
+                "we provide these services at no cost to participants. And the impact is measurable.\n\n"
+                "But we cannot do it alone. Partnership with other nonprofit organizations, healthcare providers, and funders "
+                "is how we extend our reach.\n\n"
+                "If your organization shares this mission, I would value a conversation about working together.\n\n"
+                "Collaboration is how we serve more people who need us.",
+
+                "What we have learned serving underserved populations with chronic diseases:\n\n"
+                "At The Fitness Initiative, three principles guide everything we do:\n\n"
+                "1. Financial barriers are health barriers. When people cannot afford to eat well or stay active, their chronic "
+                "conditions worsen. Grant-funded programs remove that obstacle.\n\n"
+                "2. Community-designed programs work better. When participants shape the curriculum, engagement and outcomes improve "
+                "dramatically. Our Cooking with Exercise program was built this way.\n\n"
+                "3. Partnership extends impact. No single organization can serve everyone. Collaboration among nonprofits, "
+                "healthcare providers, and funders is how we build sustainable change.\n\n"
+                "If your nonprofit serves underserved chronic disease populations, we should talk."
             ],
             "nonprofit_insights": [
-                "Running a health-focused nonprofit in 2025 has taught me three things:\n\n1. Community trust is earned through consistency, not campaigns\n2. The best programs are designed WITH the community, not FOR them\n3. Impact measurement matters — but stories move people\n\nAt TFI, we apply these principles daily. Our Cooking with Exercise program was built through a year of participatory design with real community input.\n\nWhat principles guide your nonprofit work?",
-                "Health equity isn't just a buzzword — it's a measurable goal.\n\nIn Monroe County, disparities in health outcomes follow predictable lines: income, race, and zip code. At The Fitness Initiative, we're working to break those patterns.\n\nHow? By making our programs accessible (free/low-cost), culturally relevant, and community-designed.\n\nThe data shows it works. The stories confirm it.\n\n#NonprofitImpact #HealthEquity"
+                "For nonprofit CEOs and Executive Directors:\n\n"
+                "Chronic disease disproportionately affects low-income populations. Yet most health interventions are designed "
+                "for people who can already afford to be healthy.\n\n"
+                "At The Fitness Initiative, we focus on the gap. Our grant-funded programs serve individuals in Monroe County "
+                "living with chronic diseases who cannot afford the resources they need. And we do it through evidence-based, "
+                "community-designed programming that produces measurable outcomes.\n\n"
+                "This model works. It attracts grants. And it changes lives.\n\n"
+                "I am always open to sharing our approach with nonprofit leaders who want to strengthen their impact "
+                "in underserved communities.\n\n"
+                "Let us connect.",
+
+                "A question for nonprofit leaders: Who is your programming designed for?\n\n"
+                "Many health nonprofits design programs for the populations that are easiest to serve. At The Fitness Initiative, "
+                "we design programs for the populations that need us most: individuals with chronic diseases who cannot afford "
+                "healthy living resources.\n\n"
+                "This focus has shaped everything about our model, from our grant-funded structure to our participatory "
+                "community design process to our measurable health outcome metrics.\n\n"
+                "The result is programming that serves the most underserved and delivers results that funders recognize.\n\n"
+                "If your organization is ready to explore collaboration that serves this population, I would welcome the conversation."
             ]
         }
         template = choice(templates.get(post_type, templates["nonprofit_insights"]))
-        # Fill in placeholders
-        content = template.format(
-            title="[See latest blog post]",
-            topic="community health and wellness",
-            url="https://www.thefitnessinitiative.org/blog.html",
-            finding="community-based interventions significantly improve health outcomes",
-            journal="[Recent Journal]",
-            source="[Link in comments]",
-            number="hundreds of"
-        )
-        # LinkedIn limit: 3000 chars
-        if len(content) > 2900:
-            content = content[:2897] + "..."
-        return content
+        if len(template) > 2900:
+            template = template[:2897] + "..."
+        return template
 
     def select_hashtags(self):
-        """Select hashtags for a post."""
         always = self.social_config.get("hashtags", {}).get("always", [])
         rotate = self.social_config.get("hashtags", {}).get("rotate", [])
         rotating = sample(rotate, min(3, len(rotate)))
         all_tags = always + rotating
-        return " ".join(f"#{tag}" for tag in all_tags)
+        return " ".join("#" + tag for tag in all_tags)
 
     def publish_post(self, content, post_record):
-        """Publish post to LinkedIn via API (requires access token)."""
         token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
         if not token:
-            self.logger.info("  No LINKEDIN_ACCESS_TOKEN found — saving as draft only")
             post_record["status"] = "draft_no_token"
             return
         try:
+            import requests
             resp = requests.post(
                 "https://api.linkedin.com/v2/ugcPosts",
-                headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+                headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
                 json={
-                    "author": f"urn:li:person:{self.get_person_urn()}",
+                    "author": "urn:li:organization:68188867",
                     "lifecycleState": "PUBLISHED",
                     "specificContent": {
                         "com.linkedin.ugc.ShareContent": {
@@ -144,23 +201,16 @@ class SocialAgent:
             if resp.status_code in (200, 201):
                 post_record["status"] = "published"
                 self.results["posts_published"].append(post_record)
-                self.logger.info("  LinkedIn post published successfully")
             else:
-                self.logger.warning(f"  LinkedIn API returned {resp.status_code}: {resp.text[:200]}")
-                post_record["status"] = f"api_error_{resp.status_code}"
+                post_record["status"] = "api_error_%d" % resp.status_code
         except Exception as e:
-            self.logger.error(f"  LinkedIn publish failed: {e}")
             post_record["status"] = "publish_error"
 
-    def get_person_urn(self):
-        """Get LinkedIn person URN from API."""
+    def get_person_urn(self): # unused - posting as org
         token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
         try:
-            resp = requests.get(
-                "https://api.linkedin.com/v2/me",
-                headers={"Authorization": f"Bearer {token}"},
-                timeout=15
-            )
+            import requests
+            resp = requests.get("https://api.linkedin.com/v2/me", headers={"Authorization": "Bearer " + token}, timeout=15)
             if resp.status_code == 200:
                 return resp.json().get("id", "")
         except Exception:
@@ -169,8 +219,7 @@ class SocialAgent:
 
     @staticmethod
     def _weighted_choice(items, weights):
-        """Weighted random selection."""
-        total = sum(weights)
+        total = int(sum(weights))
         r = choice(range(1, total + 1))
         cumulative = 0
         for item, weight in zip(items, weights):
@@ -180,8 +229,6 @@ class SocialAgent:
         return items[-1]
 
     def save_results(self):
-        """Save social results for reporting."""
-        filepath = os.path.join(self.output_dir, f"social_{datetime.now().strftime('%Y%m')}.json")
+        filepath = os.path.join(self.output_dir, "social_%s.json" % datetime.now().strftime("%Y%m"))
         with open(filepath, "w") as f:
             json.dump(self.results, f, indent=2)
-        self.logger.info(f"Social results saved to {filepath}")

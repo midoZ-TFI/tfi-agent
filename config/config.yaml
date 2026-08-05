@@ -189,8 +189,8 @@ reporting:
 
 # ── GitHub Actions ───────────────────────────────────────────
 ci:
-  schedule: "0 6 1 * *"
-  weekly_schedule: "0 6 * * 1"
+  schedule: "0 15 1 * *"
+  weekly_schedule: "0 15 * * 3"
   auto_deploy_branch: "main"
 
 # ── Paths ─────────────────────────────────────────────────────
