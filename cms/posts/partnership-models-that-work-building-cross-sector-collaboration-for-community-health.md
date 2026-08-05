@@ -1,20 +1,20 @@
 ---
-title: "Why Movement Matters: Building Accessible Fitness for Underserved Populations"
-slug: "why-movement-matters-building-accessible-fitness-for-underserved-populations"
+title: "Partnership Models That Work: Building Cross-Sector Collaboration for Community Health"
+slug: "partnership-models-that-work-building-cross-sector-collaboration-for-community-health"
 author: "Mido Zelenjakovic"
 date: "2026-08-05"
 updated: "2026-08-05"
-pillar: "Movement"
-tags: ["exercise", "fitness", "movement"]
-meta_description: "How The Fitness Initiative is addressing why movement matters: building accessible fitness for underserved populations through evidence-based, grant-funded p..."
+pillar: "Community & Equity"
+tags: ["health equity", "community health", "nonprofit"]
+meta_description: "How The Fitness Initiative is addressing partnership models that work: building cross-sector collaboration for community health through evidence-based, grant..."
 status: "draft"
 ---
 
-## Why Movement Matters: Building Accessible Fitness for Underserved Populations
+## Partnership Models That Work: Building Cross-Sector Collaboration for Community Health
 
 At The Fitness Initiative, we believe that no one should face a chronic disease without access to the resources that can help them manage it. In communities across Monroe County and beyond, thousands of individuals are living with conditions like diabetes, heart disease, Parkinson's, and cancer recovery, yet many cannot afford the nutrition guidance, exercise support, or wellness programs that could significantly improve their quality of life.
 
-Today, we are sharing what we have learned about **why movement matters: building accessible fitness for underserved populations** and why it matters for nonprofit organizations, researchers, and funders working to make a difference in community health.
+Today, we are sharing what we have learned about **partnership models that work: building cross-sector collaboration for community health** and why it matters for nonprofit organizations, researchers, and funders working to make a difference in community health.
 
 ### The Challenge: Who Is Falling Through the Cracks?
 

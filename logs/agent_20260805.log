@@ -32,3 +32,37 @@
 2026-08-05 14:14:27 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
 2026-08-05 14:14:27 [WARNING] Build directory is empty — nothing to deploy
 2026-08-05 14:14:27 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-05 14:21:56 [INFO] Starting TFI Agent run: content
+2026-08-05 14:21:56 [INFO] Running content agent...
+2026-08-05 14:21:56 [INFO] Content Agent starting...
+2026-08-05 14:21:56 [INFO] Generating content calendar...
+2026-08-05 14:21:56 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-05 14:21:56 [INFO] Creating blog post: Serving the Underserved: How Nonprofits Can Bridge the Chronic Disease Care Gap (pillar: Chronic Conditions)
+2026-08-05 14:21:56 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/serving-the-underserved-how-nonprofits-can-bridge-the-chronic-disease-care-gap.md
+2026-08-05 14:21:56 [INFO] Blog post created: serving-the-underserved-how-nonprofits-can-bridge-the-chronic-disease-care-gap
+2026-08-05 14:21:56 [INFO] Creating blog post: The Science of Movement: What Nonprofits Need to Know About Exercise as Intervention (pillar: Movement)
+2026-08-05 14:21:56 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/the-science-of-movement-what-nonprofits-need-to-know-about-exercise-as-intervention.md
+2026-08-05 14:21:56 [INFO] Blog post created: the-science-of-movement-what-nonprofits-need-to-know-about-exercise-as-intervention
+2026-08-05 14:21:56 [INFO] Content results saved to content/blog_drafts/content_202608.json
+2026-08-05 14:21:56 [INFO] Content Agent completed successfully.
+2026-08-05 14:21:56 [INFO] content agent completed: completed
+2026-08-05 14:21:56 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-05 14:21:56 [WARNING] Build directory is empty — nothing to deploy
+2026-08-05 14:21:56 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-05 14:27:45 [INFO] Starting TFI Agent run: content
+2026-08-05 14:27:45 [INFO] Running content agent...
+2026-08-05 14:27:45 [INFO] Content Agent starting...
+2026-08-05 14:27:45 [INFO] Generating content calendar...
+2026-08-05 14:27:45 [INFO] Content calendar: 2 posts planned across 2 pillars
+2026-08-05 14:27:45 [INFO] Creating blog post: Partnership Models That Work: Building Cross-Sector Collaboration for Community Health (pillar: Community & Equity)
+2026-08-05 14:27:45 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/partnership-models-that-work-building-cross-sector-collaboration-for-community-health.md
+2026-08-05 14:27:45 [INFO] Blog post created: partnership-models-that-work-building-cross-sector-collaboration-for-community-health
+2026-08-05 14:27:45 [INFO] Creating blog post: Fitness 101: Engaging Families in Health Through Community-Based Programming (pillar: Programs & Partnerships)
+2026-08-05 14:27:45 [INFO] Post created: /Users/mido/Desktop/tfi-agent/cms/posts/fitness-101-engaging-families-in-health-through-community-based-programming.md
+2026-08-05 14:27:45 [INFO] Blog post created: fitness-101-engaging-families-in-health-through-community-based-programming
+2026-08-05 14:27:45 [INFO] Content results saved to content/blog_drafts/content_202608.json
+2026-08-05 14:27:45 [INFO] Content Agent completed successfully.
+2026-08-05 14:27:45 [INFO] content agent completed: completed
+2026-08-05 14:27:45 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
+2026-08-05 14:27:45 [WARNING] Build directory is empty — nothing to deploy
+2026-08-05 14:27:45 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}

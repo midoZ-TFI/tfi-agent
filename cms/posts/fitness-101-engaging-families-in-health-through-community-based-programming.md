@@ -1,20 +1,20 @@
 ---
-title: "Type 2 Diabetes Management Through Lifestyle Intervention: A Model for Nonprofit Collaboration"
-slug: "type-2-diabetes-management-through-lifestyle-intervention-a-model-for-nonprofit-collaboration"
+title: "Fitness 101: Engaging Families in Health Through Community-Based Programming"
+slug: "fitness-101-engaging-families-in-health-through-community-based-programming"
 author: "Mido Zelenjakovic"
 date: "2026-08-05"
 updated: "2026-08-05"
-pillar: "Chronic Conditions"
-tags: ["chronic disease", "Parkinson's", "diabetes"]
-meta_description: "How The Fitness Initiative is addressing type 2 diabetes management through lifestyle intervention: a model for nonprofit collaboration through evidence-base..."
+pillar: "Programs & Partnerships"
+tags: ["programs", "partnerships", "Cooking with Exercise"]
+meta_description: "How The Fitness Initiative is addressing fitness 101: engaging families in health through community-based programming through evidence-based, grant-funded pr..."
 status: "draft"
 ---
 
-## Type 2 Diabetes Management Through Lifestyle Intervention: A Model for Nonprofit Collaboration
+## Fitness 101: Engaging Families in Health Through Community-Based Programming
 
 At The Fitness Initiative, we believe that no one should face a chronic disease without access to the resources that can help them manage it. In communities across Monroe County and beyond, thousands of individuals are living with conditions like diabetes, heart disease, Parkinson's, and cancer recovery, yet many cannot afford the nutrition guidance, exercise support, or wellness programs that could significantly improve their quality of life.
 
-Today, we are sharing what we have learned about **type 2 diabetes management through lifestyle intervention: a model for nonprofit collaboration** and why it matters for nonprofit organizations, researchers, and funders working to make a difference in community health.
+Today, we are sharing what we have learned about **fitness 101: engaging families in health through community-based programming** and why it matters for nonprofit organizations, researchers, and funders working to make a difference in community health.
 
 ### The Challenge: Who Is Falling Through the Cracks?
 

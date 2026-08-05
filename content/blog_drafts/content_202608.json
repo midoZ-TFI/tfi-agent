@@ -2,15 +2,15 @@
   "status": "completed",
   "posts_created": [
     {
-      "title": "Type 2 Diabetes Management Through Lifestyle Intervention: A Model for Nonprofit Collaboration",
-      "slug": "type-2-diabetes-management-through-lifestyle-intervention-a-model-for-nonprofit-collaboration",
-      "pillar": "Chronic Conditions",
+      "title": "Partnership Models That Work: Building Cross-Sector Collaboration for Community Health",
+      "slug": "partnership-models-that-work-building-cross-sector-collaboration-for-community-health",
+      "pillar": "Community & Equity",
       "status": "draft"
     },
     {
-      "title": "Why Movement Matters: Building Accessible Fitness for Underserved Populations",
-      "slug": "why-movement-matters-building-accessible-fitness-for-underserved-populations",
-      "pillar": "Movement",
+      "title": "Fitness 101: Engaging Families in Health Through Community-Based Programming",
+      "slug": "fitness-101-engaging-families-in-health-through-community-based-programming",
+      "pillar": "Programs & Partnerships",
       "status": "draft"
     }
   ],
@@ -24,10 +24,10 @@
     },
     {
       "post_number": 2,
-      "pillar": "Chronic Conditions",
+      "pillar": "Community & Equity",
       "planned_date": "2026-08-20",
       "status": "planned"
     }
   ],
-  "timestamp": "2026-08-05T14:14:27.569417"
+  "timestamp": "2026-08-05T14:27:45.423472"
 }
