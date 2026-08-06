@@ -186,7 +186,7 @@ class SocialAgent:
                 "https://api.linkedin.com/v2/ugcPosts",
                 headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
                 json={
-                    "author": "urn:li:organization:68188867",
+                    "author": "urn:li:person:" + self.get_person_urn(),
                     "lifecycleState": "PUBLISHED",
                     "specificContent": {
                         "com.linkedin.ugc.ShareContent": {
@@ -206,7 +206,7 @@ class SocialAgent:
         except Exception as e:
             post_record["status"] = "publish_error"
 
-    def get_person_urn(self): # unused - posting as org
+    def get_person_urn(self):
         token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
         try:
             import requests
