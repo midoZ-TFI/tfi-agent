@@ -16,9 +16,10 @@ from pathlib import Path
 import base64 as b64
 
 import requests
-from tools.config import get_project_root
 
 logger = logging.getLogger("tfi_agent.social")
+
+PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 
 POST_TEMPLATES = [
     {
@@ -153,7 +154,7 @@ POST_TEMPLATES = [
         "type": "research_sharing",
         "content": (
             "For people living with Parkinson's disease, exercise isn't just beneficial "
-            "— it's medicine. Research shows that targeted physical activity can improve "
+            " — it's medicine. Research shows that targeted physical activity can improve "
             "mobility, balance, and quality of life for Parkinson's patients.\n\n"
             "But access remains the critical barrier. In Rochester, many individuals with "
             "Parkinson's cannot afford specialized exercise programs designed for their "
@@ -176,7 +177,7 @@ class SocialAgent:
 
     def __init__(self, config):
         self.config = config
-        self.project_root = get_project_root()
+        self.project_root = PROJECT_ROOT
         self.social_config = config.get("social", {}).get("linkedin", {})
         self.content_config = config.get("content", {})
         self.posts_dir = self.project_root / "content" / "linkedin_posts"
@@ -239,7 +240,7 @@ class SocialAgent:
             "hashtags_used": sorted(self.hashtags_used),
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
-        logger.info(f"Social Agent complete — {len(self.posts_generated)} generated, "
+        logger.info(f"Social Agent complete - {len(self.posts_generated)} generated, "
                      f"{len([p for p in self.posts_published if p != 'draft'])} published")
         return results
 
@@ -354,7 +355,7 @@ class SocialAgent:
         elif post_type == "research_sharing":
             if research_findings:
                 f = research_findings[0]
-                return base_prompt + f"\nResearch: {f['topic']} — {f['summary']}\nConnect to TFI mission, invite collaboration."
+                return base_prompt + f"\nResearch: {f['topic']} - {f['summary']}\nConnect to TFI mission, invite collaboration."
             return base_prompt + "\nChronic disease research insight. Focus on underserved populations. Invite collaboration."
         elif post_type == "community_impact":
             return base_prompt + "\nTFI community impact story. Health equity focus. End with partnership invitation."
@@ -406,7 +407,7 @@ class SocialAgent:
         """Publish a post via the LinkedIn API using JWT-decoded person ID."""
         access_token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
         if not access_token:
-            logger.warning("LINKEDIN_ACCESS_TOKEN not set — draft only.")
+            logger.warning("LINKEDIN_ACCESS_TOKEN not set - draft only.")
             return None
 
         logger.info("Publishing post to LinkedIn...")
@@ -417,7 +418,7 @@ class SocialAgent:
             hashtags_text = " ".join(f"#{tag}" for tag in post.get("hashtags", []))
             full_content = post['content'] + "\n\n" + hashtags_text
 
-            # Decode person ID from JWT token (avoids 403 on /v2/userinfo)
+            # Decode person ID from JWT token
             logger.info("Decoding person ID from access token JWT...")
             person_id = self._get_person_id_from_token(access_token)
             if not person_id:
@@ -435,7 +436,7 @@ class SocialAgent:
                 "X-Restli-Protocol-Version": "2.0.0",
             }
             payload = {
-                "author": "urn:li:person:" + person_id,
+                "author": "urn:li:person:" + str(person_id),
                 "commentary": full_content,
                 "visibility": "PUBLIC",
                 "distribution": {
@@ -510,7 +511,7 @@ class SocialAgent:
                 return data.get("content", None)
             return None
         except FileNotFoundError:
-            logger.info("z-ai CLI not available — using template")
+            logger.info("z-ai CLI not available - using template")
             return None
         except Exception:
             return None
