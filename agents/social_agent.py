@@ -97,7 +97,7 @@ POST_TEMPLATES = [
         "type": "research_sharing",
         "content": (
             "The evidence is clear: regular physical activity can reduce the risk of "
-            "Type 2 diabetes by up to 58%%. But here's the gap — the people who need "
+            "Type 2 diabetes by up to 58%. But here's the gap — the people who need "
             "this most often have the least access to safe, affordable exercise programs.\n\n"
             "At The Fitness Initiative, we see this reality every day in Rochester. Our "
             "participants come to us not because they lack motivation, but because they "
@@ -371,7 +371,7 @@ class SocialAgent:
         return selected
 
     def _save_post(self, post):
-        date_str = datetime.now().strftime("%%Y-%%m-%%d")
+        date_str = datetime.now().strftime("%Y-%m-%d")
         hashtags_csv = ", ".join(post.get("hashtags", []))
         frontmatter = f"---\ndate: {date_str}\ntype: {post.get('type', 'unknown')}\nhashtags: {hashtags_csv}\nstatus: draft\n---\n\n"
         filename = f"{date_str}-{post.get('slug', 'untitled')}.md"
@@ -387,7 +387,7 @@ class SocialAgent:
                 logger.error(f"Token is not a valid JWT (has {len(parts)} parts)")
                 return None
             payload = parts[1]
-            padding = 4 - len(payload) %% 4
+            padding = 4 - len(payload) % 4
             if padding != 4:
                 payload += '=' * padding
             decoded = b64.urlsafe_b64decode(payload)
@@ -465,7 +465,7 @@ class SocialAgent:
             return None
 
     def _update_post_status(self, post, new_status):
-        date_str = datetime.now().strftime("%%Y-%%m-%%d")
+        date_str = datetime.now().strftime("%Y-%m-%d")
         filename = f"{date_str}-{post.get('slug', 'untitled')}.md"
         filepath = self.posts_dir / filename
         if filepath.exists():
