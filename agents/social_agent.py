@@ -8,8 +8,6 @@ from tools.web_scraper import WebScraper
 
 
 class SocialAgent:
-    """Manages LinkedIn content creation and publishing."""
-
     def __init__(self, config, logger):
         self.config = config
         self.logger = logger
@@ -23,7 +21,6 @@ class SocialAgent:
         self.logger.info("Social Agent starting...")
         try:
             if not self.social_config["enabled"]:
-                self.logger.info("LinkedIn integration disabled.")
                 self.results["status"] = "skipped"
                 return self.results
             posts_this_month = self.social_config["posts_per_month"]
@@ -56,8 +53,11 @@ class SocialAgent:
         post_record = {"type": post_type, "filename": filename, "char_count": len(full_post), "status": "draft"}
         self.results["posts_created"].append(post_record)
         if self.social_config.get("auto_publish", False):
+            self.logger.info("Auto-publish is ON, attempting to publish...")
             self.publish_post(full_post, post_record)
-        self.logger.info("LinkedIn post created: %s (%d chars)" % (post_type, len(full_post)))
+        else:
+            self.logger.info("Auto-publish is OFF, saved as draft")
+        self.logger.info("LinkedIn post created: %s (%d chars) [%s]" % (post_type, len(full_post), post_record["status"]))
 
     def generate_post_content(self, post_type):
         """Generate LinkedIn content for nonprofit leaders about collaboration to serve underserved chronic disease populations."""
@@ -178,15 +178,19 @@ class SocialAgent:
     def publish_post(self, content, post_record):
         token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
         if not token:
+            self.logger.info("No LINKEDIN_ACCESS_TOKEN found, saving as draft")
             post_record["status"] = "draft_no_token"
             return
         try:
+            self.logger.info("Calling LinkedIn API...")
             import requests
+            person_urn = self.get_person_urn()
+            self.logger.info("Using person URN: %s" % person_urn)
             resp = requests.post(
                 "https://api.linkedin.com/v2/ugcPosts",
-                headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
+                headers={"Authorization": "Bearer %s" % token, "Content-Type": "application/json"},
                 json={
-                    "author": "urn:li:person:" + self.get_person_urn(),
+                    "author": "urn:li:person:%s" % person_urn,
                     "lifecycleState": "PUBLISHED",
                     "specificContent": {
                         "com.linkedin.ugc.ShareContent": {
@@ -198,24 +202,39 @@ class SocialAgent:
                 },
                 timeout=30
             )
+            self.logger.info("LinkedIn API response: %d" % resp.status_code)
             if resp.status_code in (200, 201):
                 post_record["status"] = "published"
                 self.results["posts_published"].append(post_record)
+                self.logger.info("LinkedIn post published successfully!")
             else:
+                self.logger.warning("LinkedIn API error %d: %s" % (resp.status_code, resp.text[:300]))
                 post_record["status"] = "api_error_%d" % resp.status_code
         except Exception as e:
+            self.logger.error("LinkedIn publish exception: %s" % str(e))
             post_record["status"] = "publish_error"
 
     def get_person_urn(self):
         token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
         try:
             import requests
-            resp = requests.get("https://api.linkedin.com/v2/me", headers={"Authorization": "Bearer " + token}, timeout=15)
+            resp = requests.get(
+                "https://api.linkedin.com/v2/me",
+                headers={"Authorization": "Bearer %s" % token},
+                timeout=15
+            )
+            self.logger.info("LinkedIn /me response: %d" % resp.status_code)
             if resp.status_code == 200:
-                return resp.json().get("id", "")
-        except Exception:
-            pass
-        return ""
+                data = resp.json()
+                urn = data.get("id", "")
+                self.logger.info("Person URN: %s" % urn)
+                return urn
+            else:
+                self.logger.warning("Failed to get person URN: %d %s" % (resp.status_code, resp.text[:200]))
+                return ""
+        except Exception as e:
+            self.logger.error("get_person_urn error: %s" % str(e))
+            return ""
 
     @staticmethod
     def _weighted_choice(items, weights):

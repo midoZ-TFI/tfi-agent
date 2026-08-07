@@ -3,29 +3,11 @@
   "posts_created": [
     {
       "type": "nonprofit_insights",
-      "filename": "linkedin_nonprofit_insights_20260804_0.txt",
-      "char_count": 792,
-      "status": "draft_no_token"
-    },
-    {
-      "type": "nonprofit_insights",
-      "filename": "linkedin_nonprofit_insights_20260804_1.txt",
-      "char_count": 791,
-      "status": "draft_no_token"
-    },
-    {
-      "type": "nonprofit_insights",
-      "filename": "linkedin_nonprofit_insights_20260804_2.txt",
-      "char_count": 804,
-      "status": "draft_no_token"
-    },
-    {
-      "type": "nonprofit_insights",
-      "filename": "linkedin_nonprofit_insights_20260804_3.txt",
-      "char_count": 807,
-      "status": "draft_no_token"
+      "filename": "linkedin_nonprofit_insights_20260805_0.txt",
+      "char_count": 829,
+      "status": "api_error_401"
     }
   ],
   "posts_published": [],
-  "timestamp": "2026-08-04T20:01:32.785099"
+  "timestamp": "2026-08-05T21:05:19.974840"
 }

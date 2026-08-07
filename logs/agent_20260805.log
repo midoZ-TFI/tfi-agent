@@ -66,3 +66,42 @@
 2026-08-05 14:27:45 [INFO] Deploying to midoZ-TFI/midoZ-TFI.github.io...
 2026-08-05 14:27:45 [WARNING] Build directory is empty — nothing to deploy
 2026-08-05 14:27:45 [INFO] Deploy result: {'status': 'skipped', 'message': 'Build directory empty'}
+2026-08-05 20:50:09 [INFO] Starting TFI Agent run: social
+2026-08-05 20:50:09 [INFO] Running social agent...
+2026-08-05 20:50:09 [INFO] Social Agent starting...
+2026-08-05 20:50:09 [INFO] Creating LinkedIn post 1: nonprofit_insights
+2026-08-05 20:50:09 [INFO] LinkedIn post created: nonprofit_insights (792 chars)
+2026-08-05 20:50:09 [INFO] Social Agent completed successfully.
+2026-08-05 20:50:09 [INFO] social agent completed: completed
+2026-08-05 20:51:57 [INFO] Starting TFI Agent run: social
+2026-08-05 20:51:57 [INFO] Running social agent...
+2026-08-05 20:51:57 [INFO] Social Agent starting...
+2026-08-05 20:51:57 [INFO] Creating LinkedIn post 1: nonprofit_insights
+2026-08-05 20:51:58 [INFO] LinkedIn post created: nonprofit_insights (798 chars)
+2026-08-05 20:51:58 [INFO] Social Agent completed successfully.
+2026-08-05 20:51:58 [INFO] social agent completed: completed
+2026-08-05 20:55:03 [INFO] Starting TFI Agent run: social
+2026-08-05 20:55:03 [INFO] Running social agent...
+2026-08-05 20:55:03 [INFO] Social Agent starting...
+2026-08-05 20:55:03 [INFO] Creating LinkedIn post 1: nonprofit_insights
+2026-08-05 20:55:04 [INFO] LinkedIn post created: nonprofit_insights (823 chars)
+2026-08-05 20:55:04 [INFO] Social Agent completed successfully.
+2026-08-05 20:55:04 [INFO] social agent completed: completed
+2026-08-05 20:59:20 [INFO] Starting TFI Agent run: social
+2026-08-05 20:59:20 [ERROR] social agent failed: invalid syntax (social_agent.py, line 209)
+2026-08-05 21:01:57 [INFO] Starting TFI Agent run: social
+2026-08-05 21:01:57 [ERROR] social agent failed: expected an indented block after 'if' statement on line 204 (social_agent.py, line 205)
+2026-08-05 21:05:18 [INFO] Starting TFI Agent run: social
+2026-08-05 21:05:19 [INFO] Running social agent...
+2026-08-05 21:05:19 [INFO] Social Agent starting...
+2026-08-05 21:05:19 [INFO] Creating LinkedIn post 1: nonprofit_insights
+2026-08-05 21:05:19 [INFO] Auto-publish is ON, attempting to publish...
+2026-08-05 21:05:19 [INFO] Calling LinkedIn API...
+2026-08-05 21:05:19 [INFO] LinkedIn /me response: 401
+2026-08-05 21:05:19 [WARNING] Failed to get person URN: 401 {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2026-08-05 21:05:19 [INFO] Using person URN: 
+2026-08-05 21:05:19 [INFO] LinkedIn API response: 401
+2026-08-05 21:05:19 [WARNING] LinkedIn API error 401: {"status":401,"serviceErrorCode":65600,"code":"INVALID_ACCESS_TOKEN","message":"Invalid access token"}
+2026-08-05 21:05:19 [INFO] LinkedIn post created: nonprofit_insights (829 chars) [api_error_401]
+2026-08-05 21:05:19 [INFO] Social Agent completed successfully.
+2026-08-05 21:05:19 [INFO] social agent completed: completed
