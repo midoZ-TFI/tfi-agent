@@ -120,7 +120,7 @@ class SocialAgent:
                 return None
             logger.info("Person ID: %s", pid)
             h = {"Authorization": "Bearer " + token, "Content-Type": "application/json", "LinkedIn-Version": "202503", "X-Restli-Protocol-Version": "2.0.0"}
-            p = {"author": "urn:li:person:" + pid, "commentary": body, "visibility": "PUBLIC", "distribution": {"feedDistribution": "MAIN_FEED", "targetEntities": [], "thirdPartyDistributionChannels": []}}
+            p = {"author": "urn:li:person:" + pid, "commentary": body, "visibility": "PUBLIC", "lifecycleState": "PUBLISHED", "distribution": {"feedDistribution": "MAIN_FEED", "targetEntities": [], "thirdPartyDistributionChannels": []}}
             r = requests.post("https://api.linkedin.com/rest/posts", headers=h, json=p, timeout=30)
             logger.info("LinkedIn response: %d", r.status_code)
             if r.status_code in (200, 201):
