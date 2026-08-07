@@ -10,7 +10,6 @@ logger = logging.getLogger("tfi_agent.social")
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 
 TEMPLATES = []
-
 TEMPLATES.append({"type": "community_impact", "content": "In Rochester NY, too many people living with chronic diseases cannot afford healthy food or gym memberships. The Fitness Initiative exists to change that through grant-funded programs like Cooking with Exercise, ReNewMe, and Fitness 101. We seek collaboration partners: healthcare systems, community foundations, and nonprofits who share our vision for health equity in Monroe County. What does health equity look like in your community?", "hashtags": ["HealthEquity", "NonprofitRochester", "FitnessForAll", "CommunityHealth", "RochesterNY"]})
 TEMPLATES.append({"type": "nonprofit_insights", "content": "Leading The Fitness Initiative taught me that sustainable community health requires cross-sector collaboration. No single organization solves chronic disease alone. Our grant-funded programs serve people managing Parkinson, diabetes, and heart disease who lack resources for private wellness. If you are a nonprofit leader or healthcare executive, let us connect. How is your organization building partnerships to address health disparities?", "hashtags": ["NonprofitRochester", "HealthEquity", "ChronicDiseasePrevention", "CommunityPartnerships", "MonroeCountyNY"]})
 TEMPLATES.append({"type": "program_updates", "content": "ReNewMe is a lifeline for Rochester residents rebuilding health after chronic disease diagnosis. Through grant-funded exercise and nutrition plans, participants who could not afford private coaching see real results: improved mobility, better nutrition habits, and renewed confidence. We seek healthcare partners and nonprofit collaborators to expand access. Could your organization benefit from a partnership on chronic disease management?", "hashtags": ["HealthEquity", "ReNewMe", "FitnessForAll", "ChronicDiseasePrevention", "RochesterNY"]})
@@ -54,23 +53,57 @@ class SocialAgent:
         fp.write_text(fm + post["content"], encoding="utf-8")
         logger.info("Saved: %s", fp.name)
 
-    def _get_person_id_from_token(self, token):
+    def _get_person_id(self, token):
+        """Try 3 methods to get LinkedIn person ID."""
+        # Method 1: Try /v2/me endpoint
         try:
-            parts = token.split(".")
-            if len(parts) != 3:
-                logger.error("Bad JWT: %d parts", len(parts))
-                return None
-            payload = parts[1]
-            pad = 4 - len(payload) % 4
-            if pad != 4:
-                payload += "=" * pad
-            data = json.loads(b64.urlsafe_b64decode(payload))
-            pid = data.get("sub")
-            logger.info("JWT sub=%s", pid)
-            return str(pid) if pid else None
+            logger.info("Trying /v2/me ...")
+            r = requests.get("https://api.linkedin.com/v2/me", headers={"Authorization": "Bearer " + token}, timeout=15)
+            logger.info("/v2/me response: %d", r.status_code)
+            if r.status_code == 200:
+                data = r.json()
+                pid = data.get("id")
+                logger.info("Person ID from /v2/me: %s", pid)
+                if pid:
+                    return str(pid)
+            logger.info("/v2/me error: %s", r.text[:200])
         except Exception as e:
-            logger.error("Decode error: %s", e)
-            return None
+            logger.warning("/v2/me failed: %s", e)
+
+        # Method 2: Try /v2/userinfo endpoint
+        try:
+            logger.info("Trying /v2/userinfo ...")
+            r = requests.get("https://api.linkedin.com/v2/userinfo", headers={"Authorization": "Bearer " + token}, timeout=15)
+            logger.info("/v2/userinfo response: %d", r.status_code)
+            if r.status_code == 200:
+                data = r.json()
+                pid = data.get("sub")
+                logger.info("Person ID from userinfo: %s", pid)
+                if pid:
+                    return str(pid)
+            logger.info("/v2/userinfo error: %s", r.text[:200])
+        except Exception as e:
+            logger.warning("/v2/userinfo failed: %s", e)
+
+        # Method 3: Try JWT decode
+        try:
+            logger.info("Trying JWT decode ...")
+            parts = token.split(".")
+            if len(parts) == 3:
+                payload = parts[1]
+                pad = 4 - len(payload) % 4
+                if pad != 4:
+                    payload += "=" * pad
+                data = json.loads(b64.urlsafe_b64decode(payload))
+                pid = data.get("sub")
+                if pid:
+                    logger.info("Person ID from JWT: %s", pid)
+                    return str(pid)
+        except Exception as e:
+            logger.warning("JWT decode failed: %s", e)
+
+        logger.error("All methods failed to get person ID")
+        return None
 
     def _publish_post(self, post):
         token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
@@ -81,7 +114,7 @@ class SocialAgent:
         try:
             tags_text = " ".join("#" + t for t in post.get("hashtags", []))
             body = post["content"] + "\n\n" + tags_text
-            pid = self._get_person_id_from_token(token)
+            pid = self._get_person_id(token)
             if not pid:
                 logger.error("No person ID")
                 return None
